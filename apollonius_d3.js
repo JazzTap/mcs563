@@ -1,5 +1,7 @@
-// require(['d3', 'dispatch', 'selection', 'drag'],
-// function (d3, dis, sel, drag) {
+// d3 already loaded by jupyter? but use requirejs for addtl' deps.
+
+// require(['d3'],
+// function (d3) {
     var svg = d3.select('#apollonius')
         .append('g')
         .attr('transform', 'translate(75 525) scale(50 -50)')
@@ -55,10 +57,10 @@
             d3.select(this)
               .attr("cx", d.x = d3.event.x)
               .attr("cy", d.y = d3.event.y)
-            submitState() }
+            if (!wait) submitState() }
     var drag_x = function(d) {
             d3.select(this).attr("cx", d.x = d3.event.x)
-            submitState() }
+            if (!wait) submitState() }
 
     /* var dispatch = d3.dispatch("scroll")
     dispatch.on("scroll", function(d) { d3.select(this)
@@ -76,9 +78,33 @@
         .call(dragwrap( drag_xy ))
 
     // svg.call(zoom).on("wheel.zoom", scale)
+    input.selectAll('circle').filter(function (d,i) {return i!=0})
+           .on("wheel", function(d,i) {
+                console.log(d)
+                d3.select(this).attr("r",
+                    d.r = Math.max(.1, d.r - .1*event.deltaY))
+
+                // FIXME: detect end of scroll
+                if (!wait) submitState()
+                else done = false
+                event.preventDefault()
+            })
 
 	// api functions
+
+    var wait = false, done = true
     function submitState() {
+        // TODO: properly namespace crude rate limiter
+        wait = true
+        function recover() { 
+            wait = false
+            if (!done) {
+                done = true
+                submitState()
+            }
+        }
+        setTimeout(recover, 1000/30.0)
+
         // http://stackoverflow.com/questions/11336251/accessing-d3-js-element-attributes-from-the-datum
         function d(i) {
             return input.selectAll('circle')[0][i].attributes
@@ -96,7 +122,8 @@
 		var ans = munge_reply(py_out, false)
         // console.log(ans)
 
-        // TODO: flush old output, even when .exit().remove() is stale
+        // flush old output
+        // TODO: get .exit().remove() to work
         output.selectAll('circle')
                 .remove()
 
@@ -151,3 +178,6 @@ munge_reply = function(out, verbose=true){
     var res = output.data["text/plain"].replace(/'/g, '"');
     return JSON.parse(res);
 };
+
+// initialize output
+submitState();
