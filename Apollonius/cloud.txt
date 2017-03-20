@@ -1,0 +1,15 @@
+https://cloud.sagemath.com/0a559efe-d127-4239-b30c-f3fe7fc5e911/port/jupyter/notebooks/Apollonius/apollonius_d3.ipynb
+# watch out for floating point differences. this can't possibly work while the project isn't spooled up...?
+
+https://cloud.sagemath.com/projects/0a559efe-d127-4239-b30c-f3fe7fc5e911/files/Apollonius/apollonius_d3.ipynb
+https://cloud.sagemath.com/projects/0a559efe-d127-4239-b30c-f3fe7fc5e911/files/Apollonius/apollonius_d3.js
+# doesn't work, public gets nbviewer
+
+https://cloud.sagemath.com/projects/0a559efe-d127-4239-b30c-f3fe7fc5e911/files/Apollonius/
+https://github.com/binder-project/binder/issues/53
+# time to learn wheels' requirements.txt or conda's environment.yml
+
+https://cloud.sagemath.com/projects/0a559efe-d127-4239-b30c-f3fe7fc5e911/files/INSTALL.md
+https://cloud.sagemath.com/projects/0a559efe-d127-4239-b30c-f3fe7fc5e911/files/PHCpy2/phcpy/phcpy2c2.so
+https://cloud.sagemath.com/projects/0a559efe-d127-4239-b30c-f3fe7fc5e911/files/PHCpy2/phcpy/phcpy2c2.a
+# internal links
