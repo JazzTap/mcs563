@@ -1,6 +1,6 @@
 ## Analytic Symbolic Computation
 
-#### Apollonius
+#### [Apollonius](./Apollonius)
 
 Interactive solution of Apollonius' circle problem in phcpy with d3 interface.
 
